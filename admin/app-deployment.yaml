@@ -5,6 +5,7 @@ metadata:
   labels:
     app: simple-backend
 spec:
+  replicas: 2
   selector:
     matchLabels:
       app: ci-deploy
