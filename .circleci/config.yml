@@ -48,6 +48,6 @@ jobs:
 
       - run:
           command: |
-            gcloud container clusters get-credentials circle-ci-cluster
+            gcloud container clusters get-credentials buildit-devops
             kubectl apply -f deployment.yaml
             echo "Successfully deployed to k8s cluster"
