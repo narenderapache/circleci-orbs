@@ -2,38 +2,20 @@ version: 2
 jobs:
   build:
     docker:
-      - image: wecs/circle-ci-gcloud-node:0.1.0
+      - image: google/cloud-sdk:alpine
     working_directory: ~/workspace
     steps:
       - checkout
       - setup_remote_docker
-      - restore_cache:
-          keys:
-          - v1-dependencies-{{ checksum "package.json" }}
-          - v1-dependencies-
-
-      - run:
-          name: Install node packages
-          command: |
-            npm install
-      
-      # - run:
-      #     name: Start app
-      #     command: |
-      #       npm start &
-      # - run:
-      #     name: Run tests
-      #     command: |
-      #       npm test
       # - restore_cache:
       #     keys:
       #     - v1-dependencies-{{ checksum "package.json" }}
       #     - v1-dependencies-
 
-      # - save_cache:
-      #     paths:
-      #       - node_modules
-      #     key: v1-dependencies-{{ checksum "package.json" }}
+      # - run:
+      #     name: Install node packages
+      #     command: |
+      #       npm install
       
       - run:
           name: Initialize gcloud CLI to connect to Google Cloud
@@ -49,5 +31,5 @@ jobs:
       - run:
           command: |
             gcloud container clusters get-credentials buildit-devops
-            kubectl apply -f deployment.yaml
+            kubectl apply -f ~/workspace/deployment.yaml
             echo "Successfully deployed to k8s cluster"
