@@ -29,7 +29,9 @@ jobs:
             gcloud --quiet config set compute/zone $GOOGLE_COMPUTE_ZONE
 
       - run:
+          name: install deployment and service
           command: |
             gcloud container clusters get-credentials buildit-devops
+            gcloud components install kubectl
             kubectl apply -f ~/workspace/deployment.yaml
             echo "Successfully deployed to k8s cluster"
