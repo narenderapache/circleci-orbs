@@ -17,23 +17,23 @@ jobs:
           command: |
             npm install
       
-      - run:
-          name: Start app
-          command: |
-            npm start &
-      - run:
-          name: Run tests
-          command: |
-            npm test
-      - restore_cache:
-          keys:
-          - v1-dependencies-{{ checksum "package.json" }}
-          - v1-dependencies-
+      # - run:
+      #     name: Start app
+      #     command: |
+      #       npm start &
+      # - run:
+      #     name: Run tests
+      #     command: |
+      #       npm test
+      # - restore_cache:
+      #     keys:
+      #     - v1-dependencies-{{ checksum "package.json" }}
+      #     - v1-dependencies-
 
-      - save_cache:
-          paths:
-            - node_modules
-          key: v1-dependencies-{{ checksum "package.json" }}
+      # - save_cache:
+      #     paths:
+      #       - node_modules
+      #     key: v1-dependencies-{{ checksum "package.json" }}
       
       - run:
           name: Initialize gcloud CLI to connect to Google Cloud
